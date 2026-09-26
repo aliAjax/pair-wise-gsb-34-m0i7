@@ -1,5 +1,12 @@
-import { StatusBadge } from "./StatusBadge";
+import { formatRisk } from "../../utils/formatters";
 
-export function HazardSeverityTag({ title = "HazardSeverityTag", value = "READY" }: { title?: string; value?: string }) {
-  return <div className="shared-widget"><strong>{title}</strong><StatusBadge value={value} /></div>;
+const SEVERITY_CLASS: Record<string, string> = {
+  CRITICAL: "sev-critical",
+  HIGH: "sev-high",
+  MEDIUM: "sev-medium",
+  LOW: "sev-low"
+};
+
+export function HazardSeverityTag({ value }: { value: string }) {
+  return <span className={"severity-tag " + (SEVERITY_CLASS[value] ?? "")}>{formatRisk(value)}</span>;
 }

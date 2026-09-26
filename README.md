@@ -56,7 +56,16 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 
 - DeviceType: constants/DeviceType、types/DeviceType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - InspectionStatus: constants/InspectionStatus、types/InspectionStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
-- HazardSeverity: constants/HazardSeverity、types/HazardSeverity、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- HazardSeverity: constants/HazardSeverity、types/HazardSeverity、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用；排序权重见 `HazardSeverityRank`（前端 `constants/HazardSeverity.ts`、后端 `constants/hazard_severity.py`）。
+- RectifyStatus（OPEN/IN_PROGRESS/PENDING_REVIEW/CLOSED）: 前端 `constants/RectifyStatus.ts`、`types/HazardTicket.ts`、`hooks/useHazardFlow.ts`、`pages/HazardsPage.tsx`、`utils/formatters.ts`；后端 `constants/rectify_status.py`、`services/hazard_ticket_service.py`、`constructors/hazard_ticket_factory.py`；两侧 `errorCodes/errorMessages`、`logTemplates` 均有对应条目。
+
+## 隐患整改流转
+
+- `GET /api/hazard-ticket`：按严重程度（CRITICAL→LOW）与是否逾期排列，已归档不再算逾期。
+- `GET /api/hazard-ticket/{id}`：整改单 + 关联设备 + 检查结果 + 流转记录。
+- `POST /api/hazard-ticket/{id}/submit`（`x-role: vendor`）：填写处理说明后进入待复验；仅 OPEN/IN_PROGRESS 可提交。
+- `POST /api/hazard-ticket/{id}/review`（`x-role: auditor`）：`approve` 归档并记录 `closed_at`；`reject` 必须填退回原因，单据回到处理中。
+- 每次提交都重新核对当前状态：重复提交/越权/状态不符返回 409/403/422 及明确原因；处理说明、复验意见与状态变更写入 `hazardTicketFlow` 供查询。
 
 ## 为什么会牵一发动全身
 

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from src.middlewares.auth_middleware import auth_middleware
 from src.middlewares.audit_log_middleware import audit_log_middleware
+from src.middlewares.error_handler_middleware import error_handler_middleware
 from src.routes.building_routes import router as building_router
 from src.routes.fire_device_routes import router as fire_device_router
 from src.routes.inspection_task_routes import router as inspection_task_router
@@ -9,6 +10,7 @@ from src.routes.hazard_ticket_routes import router as hazard_ticket_router
 
 app = FastAPI(title="消防设施巡检维保平台")
 app.middleware("http")(auth_middleware)
+app.middleware("http")(error_handler_middleware)
 app.middleware("http")(audit_log_middleware)
 
 @app.get("/health")

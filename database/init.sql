@@ -50,7 +50,20 @@ CREATE TABLE IF NOT EXISTS hazard_ticket (
   deadline TEXT,
   rectify_status TEXT,
   rectify_note TEXT,
+  review_note TEXT,
+  submitted_at TEXT,
   closed_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS hazard_flow_event (
+  id INTEGER PRIMARY KEY,
+  ticket_id TEXT,
+  action TEXT,
+  actor_role TEXT,
+  note TEXT,
+  from_status TEXT,
+  to_status TEXT,
+  created_at TEXT
 );
 
 CREATE TABLE IF NOT EXISTS audit_log (

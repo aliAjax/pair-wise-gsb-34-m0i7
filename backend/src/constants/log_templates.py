@@ -27,6 +27,17 @@ LOG_TEMPLATES = {
     "HazardTicket.create",
     "HazardTicket.update",
     "HazardTicket.status",
-    "HazardTicket.export"
+    "HazardTicket.export",
+    "HazardTicket.submitRectify",
+    "HazardTicket.reviewApprove",
+    "HazardTicket.reviewReject"
   ]
+}
+
+# 整改流转动作 -> 日志模板，service 写流转记录时引用
+HAZARD_FLOW_LOG = {
+  "CREATE": "HazardTicket.create",
+  "SUBMIT_RECTIFY": "HazardTicket.submitRectify",
+  "REVIEW_APPROVE": "HazardTicket.reviewApprove",
+  "REVIEW_REJECT": "HazardTicket.reviewReject"
 }

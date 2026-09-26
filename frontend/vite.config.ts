@@ -1,3 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-export default defineConfig({ plugins: [react()], server: { port: 20103, host: "0.0.0.0" } });
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 20103,
+    host: "0.0.0.0",
+    // 本地开发时把 /api 转给后端，前端代码只请求 /api
+    proxy: { "/api": { target: "http://localhost:21103", changeOrigin: true } }
+  }
+});
