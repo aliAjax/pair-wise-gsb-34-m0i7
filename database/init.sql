@@ -53,6 +53,17 @@ CREATE TABLE IF NOT EXISTS hazard_ticket (
   closed_at TEXT
 );
 
+CREATE TABLE IF NOT EXISTS hazard_ticket_flow (
+  id INTEGER PRIMARY KEY,
+  ticket_id TEXT,
+  action TEXT,
+  from_status TEXT,
+  to_status TEXT,
+  note TEXT,
+  operator_role TEXT,
+  created_at TEXT
+);
+
 CREATE TABLE IF NOT EXISTS audit_log (
   id INTEGER PRIMARY KEY,
   actor TEXT,

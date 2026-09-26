@@ -57,6 +57,15 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 - DeviceType: constants/DeviceType、types/DeviceType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - InspectionStatus: constants/InspectionStatus、types/InspectionStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - HazardSeverity: constants/HazardSeverity、types/HazardSeverity、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- RectifyStatus（IN_PROGRESS 处理中 / PENDING_REVIEW 待复验 / CLOSED 已关闭）: constants/RectifyStatus、types/RectifyStatus、hooks/useHazardFlow、logTemplates、errorMessages、隐患整改页列表与详情、后端 service/routes 均有引用。
+
+## 隐患整改流转
+
+- 列表 `GET /api/hazard-ticket` 按严重程度（CRITICAL→LOW）和是否逾期排序。
+- 详情 `GET /api/hazard-ticket/{id}` 返回整改单、关联设备、检查结果和流转记录（hazardTicketFlow）。
+- 维保商 `POST /api/hazard-ticket/{id}/submit` 提交处理说明：仅处理中可提交，成功后进入待复验。
+- 审计员 `POST /api/hazard-ticket/{id}/review` 复验：`action=REJECT` 必须填退回原因，单据回到处理中；`action=APPROVE` 记录 `closed_at` 并归档。
+- 每次提交都核对当前状态与角色，重复或越权操作返回 `{code, message}`（如 `INVALID_TICKET_STATE`、`RBAC_DENIED`），处理说明、复验意见和新状态写入流转记录供查询。
 
 ## 为什么会牵一发动全身
 

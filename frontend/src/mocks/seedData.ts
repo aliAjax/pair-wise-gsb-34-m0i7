@@ -100,63 +100,195 @@ export const mockData = {
       "id": 1,
       "task_id": 1,
       "device_id": 1,
-      "item_code": "item code 1",
-      "result_status": "IN_PROGRESS",
-      "measured_value": "measured value 1",
+      "item_code": "HYDRANT-01",
+      "result_status": "SUBMITTED",
+      "measured_value": "压力表指针归零",
       "photo_url": "/mock/photo_url-1.png",
-      "note": "note 1"
+      "note": "室内消火栓出水压力不足"
     },
     {
       "id": 2,
       "task_id": 2,
       "device_id": 2,
-      "item_code": "item code 2",
+      "item_code": "SMOKE-01",
       "result_status": "SUBMITTED",
-      "measured_value": "measured value 2",
+      "measured_value": "报警无反馈",
       "photo_url": "/mock/photo_url-2.png",
-      "note": "note 2"
+      "note": "烟感探测器联动测试无响应"
     },
     {
       "id": 3,
       "task_id": 3,
       "device_id": 3,
-      "item_code": "item code 3",
-      "result_status": "PLANNED",
-      "measured_value": "measured value 3",
+      "item_code": "SPRINKLER-01",
+      "result_status": "SUBMITTED",
+      "measured_value": "玻璃球破裂",
       "photo_url": "/mock/photo_url-3.png",
-      "note": "note 3"
+      "note": "喷淋喷头损坏需更换"
+    },
+    {
+      "id": 4,
+      "task_id": 1,
+      "device_id": 1,
+      "item_code": "HYDRANT-02",
+      "result_status": "SUBMITTED",
+      "measured_value": "接口锈蚀",
+      "photo_url": "/mock/photo_url-4.png",
+      "note": "水带接口锈蚀影响连接"
+    },
+    {
+      "id": 5,
+      "task_id": 2,
+      "device_id": 2,
+      "item_code": "SMOKE-02",
+      "result_status": "SUBMITTED",
+      "measured_value": "无报警反馈",
+      "photo_url": "/mock/photo_url-5.png",
+      "note": "烟感探测器无响应"
+    },
+    {
+      "id": 6,
+      "task_id": 3,
+      "device_id": 3,
+      "item_code": "SPRINKLER-03",
+      "result_status": "SUBMITTED",
+      "measured_value": "管网压力 0.05MPa",
+      "photo_url": "/mock/photo_url-6.png",
+      "note": "喷淋末端试水压力不足"
     }
   ],
   "hazardTicket": [
     {
       "id": 1,
       "result_id": 1,
-      "severity": "severity 1",
-      "owner_id": 1,
-      "deadline": "deadline 1",
+      "severity": "CRITICAL",
+      "owner_id": 11,
+      "deadline": "2026-09-20T18:00:00Z",
       "rectify_status": "IN_PROGRESS",
-      "rectify_note": "rectify note 1",
-      "closed_at": "2026-06-11T09:00:00Z"
+      "rectify_note": "",
+      "closed_at": ""
     },
     {
       "id": 2,
       "result_id": 2,
-      "severity": "severity 2",
-      "owner_id": 2,
-      "deadline": "deadline 2",
-      "rectify_status": "SUBMITTED",
-      "rectify_note": "rectify note 2",
-      "closed_at": "2026-06-12T09:00:00Z"
+      "severity": "HIGH",
+      "owner_id": 12,
+      "deadline": "2026-09-25T18:00:00Z",
+      "rectify_status": "PENDING_REVIEW",
+      "rectify_note": "已更换故障探测器并联动复测",
+      "closed_at": ""
     },
     {
       "id": 3,
       "result_id": 3,
-      "severity": "severity 3",
-      "owner_id": 3,
-      "deadline": "deadline 3",
-      "rectify_status": "PLANNED",
-      "rectify_note": "rectify note 3",
-      "closed_at": "2026-06-13T09:00:00Z"
+      "severity": "MEDIUM",
+      "owner_id": 11,
+      "deadline": "2026-10-05T18:00:00Z",
+      "rectify_status": "IN_PROGRESS",
+      "rectify_note": "",
+      "closed_at": ""
+    },
+    {
+      "id": 4,
+      "result_id": 4,
+      "severity": "LOW",
+      "owner_id": 13,
+      "deadline": "2026-10-10T18:00:00Z",
+      "rectify_status": "PENDING_REVIEW",
+      "rectify_note": "已更换锈蚀接口并做防锈处理",
+      "closed_at": ""
+    },
+    {
+      "id": 5,
+      "result_id": 5,
+      "severity": "HIGH",
+      "owner_id": 12,
+      "deadline": "2026-09-18T18:00:00Z",
+      "rectify_status": "CLOSED",
+      "rectify_note": "已更换故障烟感探测器",
+      "closed_at": "2026-09-19T10:30:00Z"
+    },
+    {
+      "id": 6,
+      "result_id": 6,
+      "severity": "CRITICAL",
+      "owner_id": 11,
+      "deadline": "2026-09-30T18:00:00Z",
+      "rectify_status": "PENDING_REVIEW",
+      "rectify_note": "已修复管网漏点并加压测试",
+      "closed_at": ""
+    }
+  ],
+  "hazardTicketFlow": [
+    {
+      "id": 1,
+      "ticket_id": 1,
+      "action": "SUBMIT",
+      "from_status": "IN_PROGRESS",
+      "to_status": "PENDING_REVIEW",
+      "note": "已临时关闭阀门，待更换损坏部件",
+      "operator_role": "vendor",
+      "created_at": "2026-09-19T09:20:00Z"
+    },
+    {
+      "id": 2,
+      "ticket_id": 1,
+      "action": "REJECT",
+      "from_status": "PENDING_REVIEW",
+      "to_status": "IN_PROGRESS",
+      "note": "仅关闭阀门未更换损坏部件，需重新整改",
+      "operator_role": "auditor",
+      "created_at": "2026-09-19T15:40:00Z"
+    },
+    {
+      "id": 3,
+      "ticket_id": 2,
+      "action": "SUBMIT",
+      "from_status": "IN_PROGRESS",
+      "to_status": "PENDING_REVIEW",
+      "note": "已更换故障探测器并联动复测",
+      "operator_role": "vendor",
+      "created_at": "2026-09-24T11:05:00Z"
+    },
+    {
+      "id": 4,
+      "ticket_id": 4,
+      "action": "SUBMIT",
+      "from_status": "IN_PROGRESS",
+      "to_status": "PENDING_REVIEW",
+      "note": "已更换锈蚀接口并做防锈处理",
+      "operator_role": "vendor",
+      "created_at": "2026-09-25T16:45:00Z"
+    },
+    {
+      "id": 5,
+      "ticket_id": 5,
+      "action": "SUBMIT",
+      "from_status": "IN_PROGRESS",
+      "to_status": "PENDING_REVIEW",
+      "note": "已更换故障烟感探测器",
+      "operator_role": "vendor",
+      "created_at": "2026-09-18T14:10:00Z"
+    },
+    {
+      "id": 6,
+      "ticket_id": 5,
+      "action": "APPROVE",
+      "from_status": "PENDING_REVIEW",
+      "to_status": "CLOSED",
+      "note": "现场复核正常，同意归档",
+      "operator_role": "auditor",
+      "created_at": "2026-09-19T10:30:00Z"
+    },
+    {
+      "id": 7,
+      "ticket_id": 6,
+      "action": "SUBMIT",
+      "from_status": "IN_PROGRESS",
+      "to_status": "PENDING_REVIEW",
+      "note": "已修复管网漏点并加压测试",
+      "operator_role": "vendor",
+      "created_at": "2026-09-26T08:30:00Z"
     }
   ]
 } as const;

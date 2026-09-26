@@ -1,0 +1,13 @@
+ROLE_INSPECTOR = "inspector"
+ROLE_VENDOR = "vendor"
+ROLE_MANAGER = "manager"
+ROLE_AUDITOR = "auditor"
+
+ROLES = [ROLE_INSPECTOR, ROLE_VENDOR, ROLE_MANAGER, ROLE_AUDITOR]
+
+ROLE_TEXT = {
+    ROLE_INSPECTOR: "巡检员",
+    ROLE_VENDOR: "维保商",
+    ROLE_MANAGER: "物业主管",
+    ROLE_AUDITOR: "审计员",
+}

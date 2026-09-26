@@ -28,5 +28,10 @@ LOG_TEMPLATES = {
     "HazardTicket.update",
     "HazardTicket.status",
     "HazardTicket.export"
+  ],
+  "HazardTicketFlow": [
+    "HazardTicketFlow.submit_rectify",
+    "HazardTicketFlow.review_approve",
+    "HazardTicketFlow.review_reject"
   ]
 }
